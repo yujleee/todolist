@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+# TODO LIST
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+리액트로 만들어본 투두 리스트
 
-## Available Scripts
+🔗 https://todolist-phi-rouge.vercel.app/
 
-In the project directory, you can run:
 
-### `yarn start`
+![스크린샷 2022-12-06 오후 8 04 55](https://user-images.githubusercontent.com/82587107/205900990-16e822ab-4e32-45cb-a382-b3d6bb82b341.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br/>
+<br/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🗂 디렉토리 구조
 
-### `yarn test`
+```
+📦public
+ ┣ 📂favicon
+ ┗ 📜index.html
+📦src
+ ┣ 📂components
+ ┃ ┣ 📜TodoCreate.js
+ ┃ ┣ 📜TodoItem.js
+ ┃ ┗ 📜TodoList.js
+ ┣ 📜App.css
+ ┣ 📜App.js
+ ┣ 📜index.css
+ ┗ 📜index.js
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- favicon : 파비콘 관련 파일 디렉토리
+- components : 여러 차례 쓰이는 컴포넌트 디렉토리
 
-### `yarn build`
+</br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 📦 분리한 컴포넌트
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### 📍 TodoCreate
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+입력값을 등록할 수 있는 컴포넌트 입니다.
+입력과 관련된 코드가 좀
 
-### `yarn eject`
+#### 📍 TodoList
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![image](https://user-images.githubusercontent.com/82587107/205858415-96bf8df4-da19-4bd5-9095-40578b6d32fd.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+진행중이거나 완료된 투두리스트를 렌더링하는 컴포넌트 입니다.
+두 개의 리스트가 동일한 구조이기 때문에 하나의 컴포넌트로 만들어 제목(listTitle)과 필터링된 투두리스트를 넘겨서 렌더링할 수 있도록 했습니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+const TodoList = ({ listTitle, todos, onToggle, onDelete }) => {
+  return (
+    <ListWrapper>
+      <h2>{listTitle}</h2>
+      <TodoListWrapper>
+        {todos.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            id={todo.id}
+            title={todo.title}
+            body={todo.body}
+            isDone={todo.isDone}
+            onToggle={onToggle}
+            onDelete={onDelete}
+          />
+        ))}
+      </TodoListWrapper>
+    </ListWrapper>
+  );
+};
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
 
-## Learn More
+<br/>
+<br/>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### 📍 TodoItem
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![image](https://user-images.githubusercontent.com/82587107/205859575-84a2b616-26b1-4ae1-a05b-2aca6ef885f3.png)
 
-### Code Splitting
+각각의 작성한 투두에 해당하는, 가장 많이 재사용되는 컴포넌트입니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+const TodoItem = ({ title, body, id, isDone, onToggle, onDelete }) => {
+  return (
+    <TodoItemBlock key={id} isDone={isDone}>
+      {isDone && <BsPatchCheckFill size={32} color={'#10c7a2'} cursor={'pointer'} onClick={() => onToggle(id)} />}
+      {!isDone && <BsPatchCheckFill size={32} color={'#ddd'} cursor={'pointer'} onClick={() => onToggle(id)} />}
+      <div className="contents">
+        <p>
+          <strong>{title}</strong>
+        </p>
+        <p>{body}</p>
+      </div>
+      <BsTrashFill size={24} color={'#ccc'} cursor={'pointer'} onClick={() => onDelete(id)} />
+    </TodoItemBlock>
+  );
+};
+```
 
-### Analyzing the Bundle Size
+`isDone`의 클릭 여부에 따라서 색상이 있는 아이콘, 없는 아이콘이 렌더링 되도록 했습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<br/>
+<br/>
