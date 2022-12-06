@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import TodoCreate from './components/TodoCreate';
+import TodoList from './components/TodoList';
 
 import './App.css';
-import List from './components/List';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -34,13 +34,13 @@ function App() {
         <h1 className="title"> TO-DO LIST</h1>
         <TodoCreate onSubmitHandler={onSubmitHandler} />
       </section>
-      <List
+      <TodoList
         todos={todos.filter((todo) => !todo.isDone)}
         listTitle={'🔥 진행중 🔥'}
         onToggle={onToggleHandler}
         onDelete={onDeleteHandler}
       />
-      <List
+      <TodoList
         todos={todos.filter((todo) => todo.isDone)}
         listTitle={'🎉 완료 🎉'}
         onToggle={onToggleHandler}
