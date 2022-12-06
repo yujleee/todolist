@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const TodoListWrapper = styled.ul`
   flex: 1;
-  padding: 20px;
+  padding: 20px 0;
 `;
 
 const TodoList = ({ todos, onToggle, onDelete }) => {

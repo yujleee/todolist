@@ -16,14 +16,14 @@ const TodoItemBlock = styled.li`
 
     p:last-child {
       color: #303030;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
   }
 
   strong {
     display: inline-block;
-    font-size: 1.2rem;
-    margin-bottom: 4px;
+    font-size: 1.1rem;
+    margin-bottom: 2px;
   }
 `;
 
