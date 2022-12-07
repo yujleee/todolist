@@ -35,5 +35,5 @@ const ListWrapper = styled.section`
 
 const TodoListWrapper = styled.ul`
   flex: 1;
-  padding: 20px;
+  padding: 20px 0;
 `;
