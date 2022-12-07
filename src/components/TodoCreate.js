@@ -9,7 +9,7 @@ const TodoCreate = ({ onSubmitHandler }) => {
 
   const handleSubmit = () => {
     if (!text || !title) {
-      console.log('x');
+      alert('텍스트를 입력해주세요.');
       return;
     }
 

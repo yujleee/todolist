@@ -25,7 +25,9 @@ function App() {
   };
 
   const onDeleteHandler = (id) => {
-    if (window.confirm('해당 투두를 정말로 삭제하시겠습니까?')) setTodos(todos.filter((todo) => todo.id !== id));
+    if (window.confirm('해당 투두를 정말로 삭제하시겠습니까?')) {
+      setTodos(todos.filter((todo) => todo.id !== id));
+    }
   };
 
   return (
